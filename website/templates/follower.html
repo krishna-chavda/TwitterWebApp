@@ -1,0 +1,89 @@
+{% extends "base.html"%}
+
+{% block content %}
+{% load static %}
+
+
+
+<!-- <form action="" method="POST"> -->
+{% csrf_token %}
+<!-- <br>Enter your tweet id:<input type="text" name="tweet"><br><br>
+      <input type="submit">
+      </form> -->
+<div class="row">
+  <div class="col" style="height:800px; overflow-y: scroll;">
+    <h3>Total followers:{{count}}</h3>
+
+    <h2 style="color: rgb(188, 121, 125);">page number:{{page.number}}</h2>
+    <!-- <h6>{{a1}}</h6> -->
+
+
+
+
+
+    <table style="font-size: large;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"
+      id="table_body">
+      <!-- <tr style="font-size: x-large;color: rgb(246, 251, 253); background-color: rgb(149, 149, 89);">
+        <th>id</th>
+        
+        <th>name</th>
+        <th>username</th>
+      </tr> -->
+      {%for a in page.object_list %}
+      <tr id="row1">
+        <td rowspan="3">
+          <div>
+            <span class="dot2" style="margin: 20px;"></span>
+          </div>
+        </td>
+      </tr>
+      <tr id="row2">
+        <td style="font-weight: bold;">{{a.name}}</td>
+      </tr>
+      <tr id="row3">
+        <!-- <td><a style="color: rgb(101, 92, 92);text-decoration:none;"
+            href="{% url 'refollower'%}?q={{a.username}}">@{{a.username}}</a></td> -->
+        <td><input type="button" class="f1" value="@{{a.username}}" q_value="{{a.username}}" style="border: none;background: none;color:gray;"/></td>
+      </tr>
+
+
+      {% endfor %}
+    </table>
+
+    <div class="page-link">
+      {% if page.has_previous %}
+
+      <a class="button1" href="{% url 'follower'%}?q={{userid}}&page={{page.previous_page_number}}">Previous page</a>
+      {% endif %}
+      {% if page.has_next %}
+      <a class="button2" href="{% url 'follower'%}?q={{userid}}&page={{page.next_page_number}}">Next page</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col" id="f2">
+    <script src="{% static 'js/jquery-1.11.3.js' %}"></script>
+    <script>
+
+      $(document).ready(function () {
+
+        $(".f1").click(function () {
+          q=$(this).attr('q_value');
+          $.ajax({
+            url: "{% url 'refollower'%}?q="+q,
+            
+          }).done(function (response) {
+            $("#f2").html(response);
+          });
+
+        });
+      });
+
+    </script>
+    
+  </div>
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html"%}
+{% block content %}
+<!-- <form action="" method="POST"> -->
+      {% csrf_token %}
+      <!-- <br>Enter your user id:<input type="text" name="tweet"><br><br>
+      <input type="submit"> -->
+      </form>
+      <h1>tweets</h1>
+      <!-- <h6>{{a1}}</h6> -->
+      {%for a in a1%}
+      <table border="2"style="background-color: blueviolet;margin-left: auto;
+      margin-right: auto;border-spacing:30px;font-size: large;;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+      <tr style="font-size: x-large;color: rgb(246, 251, 253); background-color: rgb(149, 149, 89);">
+        <th>id</th>
+        
+        <th>text</th>
+      </tr>
+      <tr> 
+        <td>{{a.id}}</td><br>
+       
+        <td>{{a.text}}</td><br>
+    </tr> 
+      
+    </table>
+    {%endfor%}
+{% endblock content %}
+

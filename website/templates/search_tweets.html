@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+{% block content %}
+<form action="" method="POST" style="text-align: center;">
+{% csrf_token %}
+<br><label style="color: rgb(11, 11, 11);font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: x-large;">Enter your tweet id:</label> &nbsp; 
+  <input type="text" name="tweet" style="background-color: bisque;"><br><br>
+      <input type="submit" class="btn btn-primary">
+</form>
+      <h1>search for tweets base on id</h1>
+      <!-- <h6>{{a1}}</h6> -->
+      {%for a in a1%}
+      <table border="2"  style="background-color: blueviolet;margin-left: auto;
+      margin-right: auto;border-spacing:30px;font-size: large;;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+      <tr style="font-size: x-large;color: rgb(246, 251, 253); background-color: rgb(149, 149, 89);">
+        <th>id</th>
+        
+        <th>text</th>
+      </tr>
+      <tr> 
+        <td>{{a.id}}</td>
+       
+        <td>{{a.text}}</td>
+    </tr> 
+      
+    </table>
+    {%endfor%}
+{% endblock content %}
+
